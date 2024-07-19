@@ -1,7 +1,6 @@
 import objaverse
 import os
 import json
-import shutil
 import argparse
 
 class ObjverseHelper:
@@ -32,7 +31,7 @@ class ObjverseHelper:
 
         for uid, content in objects.items():
             obj_path = os.path.join(download_folder, f"{uid}.glb")
-            shutil.copy(content, obj_path)
+            os.symlink(os.path.realpath(content), obj_path)
         
         print(f"Downloaded {len(objects)} objects tagged with '{tag}'.")
 
